@@ -41,7 +41,7 @@ triggers a review if breached — regardless of market price.
 ```
 portfolio-optimizer/
 │
-├── portfolio_manager_EN.py   # Full analysis — 6 logical cells
+├── portfolio_manager_EN.py   # Full analysis — 7 logical cells
 └── README.md
 ```
 
@@ -56,6 +56,7 @@ top-to-bottom in a Jupyter / Google Colab notebook:
 | 4 | Portfolio metrics | Annualized return, volatility, Sharpe ratio, max drawdown |
 | 5 | Markowitz optimization | Max-Sharpe optimizer on Satellite and Core separately |
 | 6 | Visualization | 5 charts: scatter, Sharpe ranking, weight comparison, cumulative performance |
+| 7 | Bootstrap CI | 95% confidence intervals on Sharpe via 10,000 resamples — portfolio and ticker level|
 
 ---
 
@@ -93,7 +94,13 @@ broader underperformance of European compounders and SaaS names in 2025.
 The optimizer concentrates the Satellite on NVDA, AVGO, JPM, and PANW;
 it reduces or minimizes exposure to positions with negative Sharpe in the window.
 
+**On statistical uncertainty**
+
+Bootstrap resampling (10,000 samples) confirms that ~310 trading days are insufficient to produce narrow confidence intervals on Sharpe ratios for high-volatility assets. CI widths of ~3.5 are structurally expected at this horizon — not a flaw in the model. WKL.AS is the only position with a confidence interval entirely below zero, making it the only statistically confirmed underperformer in the Satellite. All other negative point estimates carry enough uncertainty that fundamental Kill Switch criteria remain the primary evaluation tool.
+
 Scheduled fundamental review: **every quarter**.
+
+<img width="1597" height="597" alt="image" src="https://github.com/user-attachments/assets/70eb08c4-ff1b-418d-9d11-0eac954f5425" />
 
 ---
 
